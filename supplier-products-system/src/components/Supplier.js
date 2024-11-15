@@ -5,6 +5,10 @@ class Supplier extends Component {
     this.props.onDelete(this.props.supplier.id);
   };
 
+  onEdit = () => {
+    this.props.onEdit(this.props.supplier);
+  };
+
   render() {
     const {
       id,
@@ -22,7 +26,9 @@ class Supplier extends Component {
         <td>{mobile_number_1}</td>
         <td>{mobile_number_2}</td>
         <td>
-          <button className="mini ui blue button">Edit</button>
+          <button className="mini ui blue button" onClick={this.onEdit}>
+            Edit
+          </button>
           <button className="mini ui red button" onClick={this.onDelete}>
             Delete
           </button>

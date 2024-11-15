@@ -6,6 +6,10 @@ class SupplierList extends Component {
     this.props.onDelete(id);
   };
 
+  onEdit = (data) => {
+    this.props.onEdit(data);
+  };
+
   render() {
     const suppliers = this.props.suppliers;
     return (
@@ -29,6 +33,7 @@ class SupplierList extends Component {
                   supplier={supplier}
                   key={supplier.id}
                   onDelete={this.onDelete}
+                  onEdit={this.onEdit}
                 />
               );
             })}
