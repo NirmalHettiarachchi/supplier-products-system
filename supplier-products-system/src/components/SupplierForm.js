@@ -11,7 +11,9 @@ class SupplierForm extends Component {
     },
     btnName: "Save",
     btnClass: "ui primary button submit-button",
-    products: [{ productName: "", productPrice: "", productImage: null }],
+    products: [
+      { product_name: "", product_price: "", product_image_path: null },
+    ],
   };
 
   isEmpty(obj) {
@@ -38,7 +40,10 @@ class SupplierForm extends Component {
   onFormSubmit = (event) => {
     event.preventDefault();
     if (this.formValidation()) {
-      this.props.onFormSubmit(this.state.form);
+      this.props.onFormSubmit({
+        ...this.state.form,
+        products: this.state.products,
+      });
     }
 
     this.clearFormFields();
@@ -86,7 +91,7 @@ class SupplierForm extends Component {
     this.setState({
       products: [
         ...this.state.products,
-        { productName: "", productPrice: "", productImage: null },
+        { product_name: "", product_price: "", product_image_path: null },
       ],
     });
   };
@@ -157,9 +162,9 @@ class SupplierForm extends Component {
                 <label>Product Name</label>
                 <input
                   type="text"
-                  name="productName"
+                  name="product_name"
                   placeholder="Product Name"
-                  value={product.productName}
+                  value={product.product_name}
                   onChange={(event) => this.handleProductChange(index, event)}
                 />
               </div>
@@ -167,9 +172,9 @@ class SupplierForm extends Component {
                 <label>Product Price</label>
                 <input
                   type="number"
-                  name="productPrice"
+                  name="product_price"
                   placeholder="Product Price"
-                  value={product.productPrice}
+                  value={product.product_price}
                   onChange={(event) => this.handleProductChange(index, event)}
                 />
               </div>
@@ -177,7 +182,7 @@ class SupplierForm extends Component {
                 <label>Product Image</label>
                 <input
                   type="file"
-                  name="productImage"
+                  name="product_image_path"
                   onChange={(event) => this.handleProductChange(index, event)}
                 />
               </div>
