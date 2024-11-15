@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import Supplier from "./Supplier";
 
 class SupplierList extends Component {
+  onDelete = (id) => {
+    this.props.onDelete(id);
+  };
+
   render() {
     const suppliers = this.props.suppliers;
     return (
@@ -20,7 +24,13 @@ class SupplierList extends Component {
 
           <tbody>
             {suppliers.map((supplier) => {
-              return <Supplier supplier={supplier} key={Supplier.id} />;
+              return (
+                <Supplier
+                  supplier={supplier}
+                  key={supplier.id}
+                  onDelete={this.onDelete}
+                />
+              );
             })}
           </tbody>
         </table>

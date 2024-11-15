@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class Supplier extends Component {
+  onDelete = () => {
+    this.props.onDelete(this.props.supplier.id);
+  };
+
   render() {
     const {
       id,
@@ -19,7 +23,9 @@ class Supplier extends Component {
         <td>{mobile_number_2}</td>
         <td>
           <button className="mini ui blue button">Edit</button>
-          <button className="mini ui red button">Delete</button>
+          <button className="mini ui red button" onClick={this.onDelete}>
+            Delete
+          </button>
         </td>
       </tr>
     );

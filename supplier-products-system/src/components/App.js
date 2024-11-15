@@ -18,9 +18,20 @@ class App extends Component {
     this.setState({ suppliers: suppliers.data, loader: false });
   };
 
+  deleteSupplier = async (id) => {
+    this.setState({ loader: true });
+    await axios.delete(`${this.state.url}/${id}`);
+
+    this.getSuppliers();
+  };
+
   componentDidMount() {
     this.getSuppliers();
   }
+
+  onDelete = (id) => {
+    this.deleteSupplier(id);
+  };
 
   render() {
     return (
@@ -36,7 +47,10 @@ class App extends Component {
         <div className="ui main container">
           <SupplierForm />
           {this.state.loader ? <Loader /> : ""}
-          <SupplierList suppliers={this.state.suppliers} />
+          <SupplierList
+            suppliers={this.state.suppliers}
+            onDelete={this.onDelete}
+          />
         </div>
       </div>
     );
