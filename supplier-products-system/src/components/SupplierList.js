@@ -2,7 +2,16 @@ import React, { Component } from "react";
 import Supplier from "./Supplier";
 
 class SupplierList extends Component {
+  onDelete = (id) => {
+    this.props.onDelete(id);
+  };
+
+  onEdit = (data) => {
+    this.props.onEdit(data);
+  };
+
   render() {
+    const suppliers = this.props.suppliers;
     return (
       <div className="data">
         <table className="ui celled table">
@@ -18,7 +27,16 @@ class SupplierList extends Component {
           </thead>
 
           <tbody>
-            <Supplier />
+            {suppliers.map((supplier) => {
+              return (
+                <Supplier
+                  supplier={supplier}
+                  key={supplier.id}
+                  onDelete={this.onDelete}
+                  onEdit={this.onEdit}
+                />
+              );
+            })}
           </tbody>
         </table>
       </div>

@@ -33,3 +33,7 @@ thead tr th {
   margin: 20px 0;
   background-color: #f9f9f9;
 }
+
+.ui.inverted.dimmer {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
