@@ -14,4 +14,8 @@ class Supplier extends Model
         'mobile_number_1',
         'mobile_number_2',
     ];
+
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
 }

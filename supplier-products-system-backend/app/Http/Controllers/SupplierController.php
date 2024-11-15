@@ -12,7 +12,7 @@ class SupplierController extends Controller
      */
     public function index()
     {
-        $suppliers = Supplier::orderBy('id', 'desc')->get();
+        $suppliers = Supplier::with('products')->orderBy('id', 'desc')->get();
         return response()->json($suppliers);
     }
 
@@ -27,7 +27,12 @@ class SupplierController extends Controller
         $supplier->mobile_number_1 = $request->mobile_number_1;
         $supplier->mobile_number_2 = $request->mobile_number_2;
         $supplier->save();
-        return response()->json(data: $supplier);
+
+        foreach ($request->products as $productData) {
+            $supplier->products()->create($productData);
+        }
+
+        return response()->json($supplier->load('products'), 201);
     }
 
     /**
@@ -35,8 +40,8 @@ class SupplierController extends Controller
      */
     public function show(string $id)
     {
-        $supplier = Supplier::findOrFail($id);
-        return response()->json(data: $supplier);
+        $supplier = Supplier::with('products')->findOrFail($id);
+        return response()->json($supplier);
     }
 
 

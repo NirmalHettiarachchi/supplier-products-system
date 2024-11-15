@@ -27,13 +27,14 @@ class App extends Component {
   };
 
   createSupplier = async (data) => {
+    console.log(data);
     this.setState({ loader: true });
-
     await axios.post(this.state.url, {
       supplier_name: data.supplier_name,
       contact_person: data.contact_person,
       mobile_number_1: data.mobile_number_1,
       mobile_number_2: data.mobile_number_2,
+      products: data.products,
     });
 
     this.getSuppliers();

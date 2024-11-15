@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Product;
 use App\Models\Supplier;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Laravel\Tinker\TinkerCaster;
@@ -17,14 +18,21 @@ class SupplierFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
-    {
+    public function definition(): array {
         return [
             'supplier_name' => $this->faker->company(),
             'contact_person' => $this->faker->name(),
             'mobile_number_1' => $this->faker->phoneNumber(),
             'mobile_number_2' => $this->faker->phoneNumber(),
         ];
+    }
+
+    public function configure(): self{
+        return $this->afterCreating(function (Supplier $supplier) {
+            $supplier->products()->createMany(
+                Product::factory()->count(rand(1, 3))->make()->toArray()
+            );
+        });
     }
 }
 
